@@ -2,8 +2,10 @@ package ru;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class Block {
 
     final long id;
