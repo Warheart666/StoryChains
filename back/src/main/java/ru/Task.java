@@ -1,14 +1,25 @@
 package ru;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @AllArgsConstructor
 @Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@EqualsAndHashCode
+@ToString
 public class Task {
 
-    final long id;
-    final String name;
-    final Chain chain;
+    @Id
+    private long id;
+    private String name;
+
+    @Transient
+    private Chain chain;
 
 }

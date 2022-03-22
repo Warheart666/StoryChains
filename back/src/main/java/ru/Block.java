@@ -1,15 +1,27 @@
 package ru;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @AllArgsConstructor
 @Getter
+@Setter
+@Entity
+@NoArgsConstructor
+@EqualsAndHashCode
 public class Block {
 
-    final long id;
-    final Team team;
-    final Owner owner;
-//    Task task; //todo тут подумать.
+    @Id
+    @GeneratedValue
+    private long id;
+
+    @OneToOne
+    private Team team;
+    @OneToOne
+    private Owner owner;
 }

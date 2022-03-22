@@ -1,10 +1,20 @@
 package ru;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@Entity
+@ToString
+@EqualsAndHashCode
 public class Owner {
 
-    final long id;
-    final String name;
+    @Id
+    private long id;
+    private String name;
 }

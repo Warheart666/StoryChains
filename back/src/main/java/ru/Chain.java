@@ -1,24 +1,38 @@
 package ru;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 
 @AllArgsConstructor
 @Getter
+@Setter
 public class Chain {
 
-    final List<Element> blocks;
+    final List<Edge> blocks;
 
 
     @AllArgsConstructor
     @Getter
-    public static final class Element {
-        final Long blockId;
-        final Long prevBlock;
-        final List<Long> nextBlock;
+    @Setter
+    @NoArgsConstructor
+    @Entity
+    @ToString
+    @EqualsAndHashCode
+    public static final class Edge {
+        @Id
+        private long id;
+        @OneToOne
+        private Block sourceBlock;
+        @OneToOne
+        private Block prevBlock;
+        @ManyToMany
+        private List<Block> targetBlocks;
     }
 
 

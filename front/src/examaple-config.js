@@ -2,35 +2,40 @@ const config = {
     elements: [
         {
             data: {id: "a"},
-            position: {x: 589, y: 182},
+            position: {x: window.screen.width / 2 - 200, y: window.screen.height / 2},
             group: "nodes"
         },
         {
             data: {id: "b"},
-            position: {x: 689, y: 282},
+            position: {x: window.screen.width / 2 + 200, y: window.screen.height / 2},
             group: "nodes"
         },
         {
             data: {id: "c"},
-            position: {x: 489, y: 282},
+            position: {x: window.screen.width / 2 + 400, y: window.screen.height / 2},
             group: "nodes"
         },
         {
             data: {id: "ab", source: "a", target: "b"},
+            group: "edges"
+        },
+        {
+            data: {id: "bc", source: "b", target: "c"},
             group: "edges"
         }
     ],
     style: [
         {
             selector: "node",
-            style: {"background-color": "#666", label: "data(id)"}
+            style: {"background-color": "rgba(14,65,236,0.99)", label: "data(id)"}
         },
         {
             selector: "edge",
             style: {
-                width: 3,
-                "line-color": "#ccc",
-                "target-arrow-color": "#ccc",
+                width: 7,
+                'curve-style': 'bezier', //рисует стрелку
+                "line-color": "rgba(59,205,19,0.79)",
+                "target-arrow-color": "#dc1b1b",
                 "target-arrow-shape": "triangle"
             }
         }
