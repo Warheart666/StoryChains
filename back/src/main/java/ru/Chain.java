@@ -1,21 +1,28 @@
 package ru;
 
 import lombok.*;
+import org.springframework.lang.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.List;
 
 
 @AllArgsConstructor
 @Getter
 @Setter
+@Entity
+@NoArgsConstructor
 public class Chain {
+    @Id
+    @GeneratedValue
+    private long id;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Edge> blocks;
 
-    final List<Edge> blocks;
 
+    public Chain(List<Edge> blocks) {
+        this.blocks = blocks;
+    }
 
     @AllArgsConstructor
     @Getter
@@ -26,13 +33,25 @@ public class Chain {
     @EqualsAndHashCode
     public static final class Edge {
         @Id
+        @GeneratedValue
         private long id;
-        @OneToOne
+        @OneToOne(cascade = CascadeType.ALL)
+        @NonNull
         private Block sourceBlock;
-        @OneToOne
+
+        @OneToOne(cascade = CascadeType.ALL)
         private Block prevBlock;
-        @ManyToMany
+
+        @ManyToMany(cascade = CascadeType.ALL)
+        @NonNull
         private List<Block> targetBlocks;
+
+
+        public Edge(@NonNull Block sourceBlock, Block prevBlock, @NonNull List<Block> targetBlocks) {
+            this.sourceBlock = sourceBlock;
+            this.prevBlock = prevBlock;
+            this.targetBlocks = targetBlocks;
+        }
     }
 
 

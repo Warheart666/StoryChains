@@ -1,10 +1,9 @@
 package ru;
 
 import lombok.*;
+import org.springframework.lang.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @Getter
@@ -13,13 +12,18 @@ import javax.persistence.Transient;
 @Entity
 @EqualsAndHashCode
 @ToString
+@RequiredArgsConstructor
 public class Task {
 
     @Id
+    @GeneratedValue
     private long id;
+    @NonNull
     private String name;
 
-    @Transient
+    @OneToOne(cascade = CascadeType.ALL)
+    @NonNull
     private Chain chain;
+
 
 }

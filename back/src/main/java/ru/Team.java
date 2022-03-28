@@ -1,11 +1,10 @@
 package ru;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @AllArgsConstructor
@@ -13,9 +12,13 @@ import javax.persistence.Id;
 @Entity
 @EqualsAndHashCode
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class Team {
 
     @Id
+    @GeneratedValue
     long id;
+
+    @NonNull
     String name;
 }

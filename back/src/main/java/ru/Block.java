@@ -2,11 +2,9 @@ package ru;
 
 
 import lombok.*;
+import org.springframework.lang.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @Getter
@@ -14,14 +12,17 @@ import javax.persistence.OneToOne;
 @Entity
 @NoArgsConstructor
 @EqualsAndHashCode
+@RequiredArgsConstructor
 public class Block {
 
     @Id
     @GeneratedValue
     private long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @NonNull
     private Team team;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @NonNull
     private Owner owner;
 }
