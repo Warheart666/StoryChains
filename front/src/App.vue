@@ -24,14 +24,14 @@
 
     Vue.use(VueCytoscape)
 
-    const elements = config.elements;
-    delete config.elements;
+    // const elements = config.elements;
+    // delete config.elements;
 
     export default {
         data() {
             return {
                 config,
-                elements
+                elements: []
             };
         },
         mounted() {
@@ -43,6 +43,37 @@
                     .get("http://localhost:8081/")
                     .then(response => {
                         console.log(response.data)
+                        let elements = [];
+
+                        response.data.chain.blocks.map((bl, indx) => {
+                                let xPos = indx > indx / 2 ? indx * 200 : indx * -200
+
+                                return {
+                                    "data": {"id": bl.id.toString()},
+                                    "position": {"x": window.screen.width / 2 + xPos, y: window.screen.height / 2},
+                                    "group": "nodes"
+                                }
+                            }
+                        ).forEach(value => elements.push(value))
+
+                        response.data.chain.blocks.flatMap(bl => {
+                            return bl.targetBlocks.map(tbl => {
+                                    return {
+                                        data: {
+                                            id: bl.sourceBlock.id.toString() + tbl.id.toString(),
+                                            source: bl.sourceBlock.id,
+                                            target: tbl.id
+                                        },
+                                        group: "edges"
+                                    }
+                                }
+                            )
+                        }).forEach(value => elements.push(value))
+
+                        this.elements = elements
+                        console.log(this.elements)
+
+
                     })
                     .catch(error => {
                         console.log(error)

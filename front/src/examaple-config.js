@@ -1,29 +1,29 @@
 const config = {
-    elements: [
-        {
-            data: {id: "a"},
-            position: {x: window.screen.width / 2 - 200, y: window.screen.height / 2},
-            group: "nodes"
-        },
-        {
-            data: {id: "b"},
-            position: {x: window.screen.width / 2 + 200, y: window.screen.height / 2},
-            group: "nodes"
-        },
-        {
-            data: {id: "c"},
-            position: {x: window.screen.width / 2 + 400, y: window.screen.height / 2},
-            group: "nodes"
-        },
-        {
-            data: {id: "ab", source: "a", target: "b"},
-            group: "edges"
-        },
-        {
-            data: {id: "bc", source: "b", target: "c"},
-            group: "edges"
-        }
-    ],
+    // elements: [
+    //     {
+    //         data: {id: "a"},
+    //         position: {x: window.screen.width / 2 - 200, y: window.screen.height / 2},
+    //         group: "nodes"
+    //     },
+    //     {
+    //         data: {id: "b"},
+    //         position: {x: window.screen.width / 2 + 200, y: window.screen.height / 2},
+    //         group: "nodes"
+    //     },
+    //     {
+    //         data: {id: "c"},
+    //         position: {x: window.screen.width / 2 + 400, y: window.screen.height / 2},
+    //         group: "nodes"
+    //     },
+    //     {
+    //         data: {id: "ab", source: "a", target: "b"},
+    //         group: "edges"
+    //     },
+    //     {
+    //         data: {id: "bc", source: "b", target: "c"},
+    //         group: "edges"
+    //     }
+    // ],
     style: [
         {
             selector: "node",
