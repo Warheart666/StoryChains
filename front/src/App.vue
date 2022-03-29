@@ -44,12 +44,19 @@
                     .then(response => {
                         console.log(response.data)
                         let elements = [];
+                        // let length = response.data.chain.blocks.length;
+                        //
+                        // let sorted = response.data.chain.blocks.sort((a, b) => {
+                        //     return a.sourceBlock.id - b.sourceBlock.id
+                        // });
 
-                        response.data.chain.blocks.map((bl, indx) => {
-                                let xPos = indx > indx / 2 ? indx * 200 : indx * -200
+                        response.data.chain.blocks.map(bl => {
+
+                                // let xPos = indx > length / 2 ? bl.sourceBlock.id * 100 : bl.sourceBlock.id * -100
+                                let xPos = bl.sourceBlock.id * 100
 
                                 return {
-                                    "data": {"id": bl.id.toString()},
+                                    "data": {"id": bl.sourceBlock.id, "name": bl.sourceBlock.team.name},
                                     "position": {"x": window.screen.width / 2 + xPos, y: window.screen.height / 2},
                                     "group": "nodes"
                                 }

@@ -27,7 +27,7 @@ const config = {
     style: [
         {
             selector: "node",
-            style: {"background-color": "rgba(14,65,236,0.99)", label: "data(id)"}
+            style: {"background-color": "rgba(14,65,236,0.99)", label: "data(name)", width: 100, height: 100}
         },
         {
             selector: "edge",

@@ -13,6 +13,8 @@ import javax.persistence.Id;
 @EqualsAndHashCode
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Getter
+@Setter
 public class Team {
 
     @Id
