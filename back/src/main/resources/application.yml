@@ -1,21 +1,44 @@
 spring:
-  application:
-    name: StroyChains
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  config:
+    activate:
+      on-profile: h2
+
+---
+spring:
+  config:
+    activate:
+      on-profile: pg
+  jpa:
+    properties:
+      hibernate:
+        default_schema: StoryChains
+
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres?currentSchema=StoryChains
     username: postgres
     password: 666
     driver-class-name: org.postgresql.Driver
 
+---
 
+spring:
+  profiles:
+    active: @spring.profiles.active@
+  application:
+    name: StroyChains
   jpa:
     generate-ddl: true
     hibernate:
       ddl-auto: create
     show-sql: true
-    properties:
-      hibernate:
-        default_schema: StoryChains
+
 
 server:
   port: 8081
