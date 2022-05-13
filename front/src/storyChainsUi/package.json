@@ -1,0 +1,28 @@
+{
+  "name": "storychainsui",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "vue-tsc --noEmit && vite build",
+    "dev": "vite",
+    "preview": "vite preview --port 5050",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.0.0",
+    "@vue/cli": "^5.0.4",
+    "quasar": "^2.0.0",
+    "v-network-graph": "^0.5.13",
+    "vue": "^3.2.33"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.27",
+    "@vitejs/plugin-vue": "^2.3.1",
+    "@vue/tsconfig": "^0.1.3",
+    "sass": "1.32.12",
+    "sass-loader": "^12.0.0",
+    "typescript": "~4.6.3",
+    "vite": "^2.9.5",
+    "vue-cli-plugin-quasar": "~5.0.1",
+    "vue-tsc": "^0.34.7"
+  }
+}

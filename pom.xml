@@ -11,6 +11,7 @@
     <modules>
         <module>back</module>
         <module>front</module>
+        <module>front</module>
     </modules>
 
     <properties>
