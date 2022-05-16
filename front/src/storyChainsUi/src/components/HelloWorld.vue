@@ -65,44 +65,41 @@ export default {
     configs: configs,
     layouts: layouts,
     edges: edges,
-    nodes: nodes
+    nodes: []
   }),
   mounted() {
     axios
         .get("http://localhost:8081/")
         .then(response => {
           console.log(response.data)
-          let elements = [];
-
+          let set = [];
           response.data.chain.blocks.map(bl => {
-
-                // let xPos = indx > length / 2 ? bl.sourceBlock.id * 100 : bl.sourceBlock.id * -100
-                let xPos = bl.sourceBlock.id * 100
-
-                return {
-                  "data": {"id": bl.sourceBlock.id, "name": bl.sourceBlock.team.name},
-                  "position": {"x": window.screen.width / 2 + xPos, y: window.screen.height / 2},
-                  "group": "nodes"
+                let obj = {}
+                const name = bl.sourceBlock.team.name
+                if (!set.includes(name)) {
+                  set.push(name)
+                  return obj[name] = {'name': name}
                 }
               }
-          ).forEach(value => elements.push(value))
+          ).forEach(v => this.nodes.push(v))
 
-          response.data.chain.blocks.flatMap(bl => {
-            return bl.targetBlocks.map(tbl => {
-                  return {
-                    data: {
-                      id: bl.sourceBlock.id.toString() + tbl.id.toString(),
-                      source: bl.sourceBlock.id,
-                      target: tbl.id
-                    },
-                    group: "edges"
-                  }
-                }
-            )
-          }).forEach(value => elements.push(value))
-
-          this.elements = elements
-          console.log(this.elements)
+          console.log("asdf")
+          // response.data.chain.blocks.flatMap(bl => {
+          //   return bl.targetBlocks.map(tbl => {
+          //         return {
+          //           data: {
+          //             id: bl.sourceBlock.id.toString() + tbl.id.toString(),
+          //             source: bl.sourceBlock.id,
+          //             target: tbl.id
+          //           },
+          //           group: "edges"
+          //         }
+          //       }
+          //   )
+          // }).forEach(value => elements.push(value))
+          //
+          // this.elements = elements
+          // console.log(this.elements)
 
 
         })
