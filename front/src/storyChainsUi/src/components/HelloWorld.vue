@@ -17,12 +17,12 @@
 import axios from 'axios'
 import * as vNG from "v-network-graph";
 
-const nodes = {
-  node1: {name: "Node 1"},
-  node2: {name: "Node 2"},
-  node3: {name: "Node 3"},
-  node4: {name: "Node 4"},
-}
+// const nodes = {
+//   node1: {name: "Node 1"},
+//   node2: {name: "Node 2"},
+//   node3: {name: "Node 3"},
+//   node4: {name: "Node 4"},
+// }
 const edges = {
   edge1: {source: "node1", target: "node2"},
   edge2: {source: "node2", target: "node3"},
@@ -73,15 +73,23 @@ export default {
         .then(response => {
           console.log(response.data)
           let set = [];
-          response.data.chain.blocks.map(bl => {
-                let obj = {}
+          response.data.chain.blocks.forEach(bl => {
+                let node = {}
                 const name = bl.sourceBlock.team.name
                 if (!set.includes(name)) {
                   set.push(name)
-                  return obj[name] = {'name': name}
+                  this.nodes.push(node[name] = {'name': name})
                 }
+                bl.targetBlocks.forEach(tb => {
+                  // edge1: {source: "node1", target: "node2"},
+
+                 this.edges `edge${bl}`
+
+
+                })
               }
-          ).forEach(v => this.nodes.push(v))
+          )
+
 
           console.log("asdf")
           // response.data.chain.blocks.flatMap(bl => {
