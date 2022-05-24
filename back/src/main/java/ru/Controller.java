@@ -22,7 +22,7 @@ public class Controller {
     public ResponseEntity<Task> getTask() {
 //        final List<Chain.Edge> all = edgeRep.findAll();
 
-        return ResponseEntity.ok(taskRep.findAll().iterator().next());
+        return ResponseEntity.ok(taskRep.findAllByOrderById().iterator().next());
     }
 
 

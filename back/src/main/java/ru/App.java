@@ -59,7 +59,7 @@ public class App implements CommandLineRunner {
 
         final Chain.Edge edge1 = new Chain.Edge(block, null, List.of(block2));
         final Chain.Edge edge2 = new Chain.Edge(block2, block, List.of(block3));
-        final Chain.Edge edge3 = new Chain.Edge(block3, null, List.of(block2));
+        final Chain.Edge edge3 = new Chain.Edge(block3, block2, List.of(block2));
         final Chain.Edge edge4 = new Chain.Edge(block2, block3, List.of(block));
 
 

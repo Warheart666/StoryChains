@@ -1,10 +1,14 @@
 <template>
     <q-page class="flex flex-center">
-        <v-network-graph
-                :configs="configs"
-                :edges="edges"
-                :nodes="nodes"
-        />
+        <div class="row full-width" ref="netGraph">
+            <v-network-graph
+                    :configs="configs"
+                    :edges="edges"
+                    :layouts="layouts"
+                    :nodes="nodes"
+                    :zoom-level="2"
+            />
+        </div>
     </q-page>
 </template>
 
@@ -38,9 +42,11 @@
 
     const configs = vNG.defineConfigs(
         {
-            view: {autoPanAndZoomOnLoad: "fit-content"},
+            view: {scalingObjects: true, autoPanAndZoomOnLoad: "center-content"},
+            path: {visible: 'true'},
             edge: {
-                gap: 5,
+                keepOrder: 'vertical',
+                gap: 8,
                 type: "straight",
                 margin: 2,
                 marker: {
@@ -62,7 +68,7 @@
         name: 'HelloWorld',
         data: () => ({
             configs: configs,
-            // layouts: layouts,
+            layouts: {nodes: {}},
             edges: {},
             nodes: {}
             // edges: edges,
@@ -74,15 +80,25 @@
                 .then(response => {
                     console.log(response.data)
                     let set = [];
+                    let clientWidth = this.$refs.netGraph.clientWidth;
+                    let indent = clientWidth / new Set(response.data.chain.blocks).size;
+                    // let lo = {}
+                    // let sorted = response.data.chain.blocks.sort((x, y) => x.sourceBlock.id - y.sourceBlock.id).map(bl => {
+                    //     if (bl.prevBlock === null)
+                    //         lo[bl.sourceBlock.id] = 0
+                    //     else
+                    // });
+
+
                     response.data.chain.blocks.forEach((bl, idx) => {
                             const name = bl.sourceBlock.team.name
                             if (!set.includes(name)) {
                                 set.push(name)
                                 this.nodes['node' + bl.sourceBlock.id] = {'name': name}
+                                // this.layouts.nodes['node' + bl.sourceBlock.id] = getCoordinates(indent, idx)
                             }
 
                             bl.targetBlocks.forEach((tb, _idx) => {
-                                // edge1: {source: "node1", target: "node2"},
                                 this.edges['edge' + (idx + _idx)] = {
                                     'source': 'node' + bl.sourceBlock.id,
                                     'target': 'node' + tb.id
@@ -90,13 +106,37 @@
                             })
                         }
                     )
+                    this.layouts.nodes = getCoordinates(response.data.chain.blocks)
 
-
-                    console.log("asdf")
                 })
                 .catch(error => {
                     console.log(error)
                 })
+        }
+
+    }
+
+    function getCoordinates(blocks, indent, idx) {
+        let nodes = {}
+        let uniqBl = []
+        let root = blocks.filter(bl => bl.prevBlock === null)[0]
+        let counter = 0
+        processing(root)
+
+        function processing(bl) {
+            console.log(++counter)
+            if (bl !== null && !uniqBl.includes(bl.sourceBlock.id)) {
+
+                uniqBl.push(bl.sourceBlock.id)
+                nodes["node" + bl.sourceBlock.id] = {'x': 0, 'y': 0}
+
+                bl.targetBlocks.filter(tb => tb !== null && tb.id !== root.sourceBlock.id).forEach(tb => {
+                    console.log('target block ' + tb.id)
+                    processing(blocks.filter(searchBl => searchBl.sourceBlock.id === tb.id)[0])
+                })
+
+
+            }
         }
 
     }

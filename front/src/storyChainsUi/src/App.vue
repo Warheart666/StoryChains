@@ -46,16 +46,16 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+    import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'LayoutDefault',
+    export default {
+      name: 'LayoutDefault',
 
-  components: {
-    HelloWorld
-  },
-  data: () => ({
-    leftDrawerOpen: false
-  })
-}
+      components: {
+        HelloWorld
+      },
+      data: () => ({
+        leftDrawerOpen: true
+      })
+    }
 </script>
